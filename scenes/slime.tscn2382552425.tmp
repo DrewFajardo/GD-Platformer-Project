@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://jyt6wfje2naw"]
 
-[ext_resource type="Script" uid="uid://cir156bt3704t" path="res://scenes/slime.gd" id="1_n6pvg"]
+[ext_resource type="Script" uid="uid://cir156bt3704t" path="res://scripts/slime.gd" id="1_n6pvg"]
 [ext_resource type="Texture2D" uid="uid://bg7v203hlo3kn" path="res://assets/sprites/Tiles/Cursed-Tilesets [16x16]/slime.png" id="1_p2gj0"]
 [ext_resource type="PackedScene" uid="uid://cpewo42idyool" path="res://scenes/killzone.tscn" id="2_n6pvg"]
 
@@ -66,3 +66,9 @@ target_position = Vector2(-8, 0)
 z_index = 2
 position = Vector2(0, -4)
 target_position = Vector2(8, 0)
+
+[node name="RayCast2DUp" type="RayCast2D" parent="."]
+position = Vector2(0, -4)
+target_position = Vector2(0, -4)
+
+[connection signal="area_entered" from="AnimatedSprite2D/killzone" to="AnimatedSprite2D/killzone" method="_on_area_entered"]

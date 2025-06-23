@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvqrbaur6dfw5"]
+
+[ext_resource type="FontFile" uid="uid://bl8qlsh57v5hg" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_chgv4"]
+
+[sub_resource type="GDScript" id="GDScript_chgv4"]
+script/source = "extends CanvasLayer
+
+@onready var score_manager: Node = %ScoreManager
+var score = 0
+var coinsCollected = score
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$coincount.text	= \"Score: \" + str(coinsCollected) 
+	
+func add_point():
+	score += 1
+"
+
+[node name="HUD" type="CanvasLayer"]
+script = SubResource("GDScript_chgv4")
+
+[node name="coincount" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("1_chgv4")
+theme_override_font_sizes/font_size = 16
+text = "Score: 0"
