@@ -2,16 +2,18 @@ extends CharacterBody2D
 
 
 const SPEED = 150.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -240.0
 
 @onready var textures: AnimatedSprite2D = $textures
+@onready var check_enemy: RayCast2D = $checkEnemy
 
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	#if is_on_floor():
+		#velocity.y += -200
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY

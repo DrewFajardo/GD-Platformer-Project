@@ -1,7 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7u4a0xxmseet"]
+[gd_scene load_steps=16 format=3 uid="uid://c7u4a0xxmseet"]
 
 [ext_resource type="Script" uid="uid://b222kfstpl36x" path="res://scripts/enemy_slime.gd" id="1_5jc4t"]
 [ext_resource type="Texture2D" uid="uid://bg7v203hlo3kn" path="res://assets/sprites/Tiles/Cursed-Tilesets [16x16]/slime.png" id="2_4l1t8"]
+[ext_resource type="PackedScene" uid="uid://cpewo42idyool" path="res://scenes/killzone.tscn" id="2_n6pvg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjw23"]
+size = Vector2(16, 5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ppcr1"]
 atlas = ExtResource("2_4l1t8")
@@ -73,27 +77,47 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrvan"]
-size = Vector2(16, 7)
+size = Vector2(20, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0gjuw"]
-size = Vector2(14, 1)
+size = Vector2(14, 2.75)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="slime" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_5jc4t")
+
+[node name="killzone" parent="." instance=ExtResource("2_n6pvg")]
+position = Vector2(-11, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(11, -4.5)
+shape = SubResource("RectangleShape2D_pjw23")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8w6w5")
 animation = &"death"
 autoplay = "default"
-frame_progress = 0.590535
+frame = 3
+frame_progress = 0.0308049
 
 [node name="slimeBody" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4.5)
+position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_lrvan")
 
 [node name="hitbox" type="Area2D" parent="."]
 position = Vector2(0, 0.5)
 
 [node name="slimeHead" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, 0.875)
 shape = SubResource("RectangleShape2D_0gjuw")
+
+[node name="RayCastleft" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(-8, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(8, 0)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
