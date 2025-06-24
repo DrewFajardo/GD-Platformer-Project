@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://3c80wy2000yv"]
+
+[ext_resource type="Texture2D" uid="uid://cj38kn888jdaw" path="res://assets/sprites/Tiles/Cursed-Tilesets [16x16]/simple.png" id="1_blr88"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_olwlv"]
+size = Vector2(48, 16)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_blr88")
+region_enabled = true
+region_rect = Rect2(32, 176, 48, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_olwlv")
+one_way_collision = true
