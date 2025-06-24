@@ -12,6 +12,5 @@ func _on_timer_timeout() -> void:
 	Engine.time_scale = 1
 	get_tree().reload_current_scene()
 
-
 func _on_area_entered(area: Area2D) -> void:
 	area.get_node("killzone").queue_free()

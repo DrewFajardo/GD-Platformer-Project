@@ -4,11 +4,10 @@ extends CharacterBody2D
 @onready var slimeAnimation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detectLeft: RayCast2D = $RayCastleft
 @onready var detectRight: RayCast2D = $RayCastRight
-@onready var check_above: RayCast2D = $hitbox/slimeHead/CheckAbove
 
-const SPEED = 100.0
+const SPEED = 60.0
 const Jump_Velocity = 400.0
-var direction = 1
+var direction = 0.5
 var health = 1
 
 func _physics_process(delta: float) -> void:
@@ -18,16 +17,15 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta):
 	if detectRight.is_colliding():
-		direction = -1
+		direction = -0.5
 	if detectLeft.is_colliding():
-		direction = 1
+		direction = 0.5
 	if direction > 0:
 		slimeAnimation.flip_h = false
 	elif direction < 0:
 		slimeAnimation.flip_h = true
-
 	position.x += direction * SPEED * delta
-
-func _on_hitbox_body_entered(body):
-	$"../../Player".position.y = -100
-	slime.queue_free()
+	
+func _on_hitbox_body_entered(_body: Node2D) -> void:
+	$"../../Player".velocity.y = -200
+	print("clicked!")
