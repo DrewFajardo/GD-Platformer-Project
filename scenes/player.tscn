@@ -1,7 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpyjhyws1isrw"]
+[gd_scene load_steps=17 format=3 uid="uid://dpyjhyws1isrw"]
 
 [ext_resource type="Script" uid="uid://bskiqeosfs5p5" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cr8q7h1yldivy" path="res://assets/sprites/Tiles/Cursed-Tilesets [16x16]/knight.png" id="2_g2els"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("2_g2els")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("2_g2els")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
+atlas = ExtResource("2_g2els")
+region = Rect2(48, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
 atlas = ExtResource("2_g2els")
@@ -33,6 +49,23 @@ region = Rect2(96, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fjrip"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v2ag")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qhqgy")
@@ -74,6 +107,10 @@ animations = [{
 radius = 5.0
 height = 14.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 4.0
+height = 12.0
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 3
 collision_layer = 2
@@ -82,9 +119,29 @@ script = ExtResource("1_g2els")
 [node name="textures" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 8)
 sprite_frames = SubResource("SpriteFrames_fjrip")
-animation = &"run"
+animation = &"death"
 autoplay = "idle"
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(1, 9)
 shape = SubResource("CapsuleShape2D_qlg0r")
+
+[node name="Hit_Box" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="damaged" type="CollisionShape2D" parent="Hit_Box"]
+position = Vector2(1, 9)
+shape = SubResource("CapsuleShape2D_g2els")
+debug_color = Color(0.93518, 0.209852, 0.374744, 0.42)
+
+[node name="Timer" type="Timer" parent="Hit_Box/damaged"]
+wait_time = 0.4
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+limit_bottom = 120
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[connection signal="body_entered" from="Hit_Box" to="." method="_on_hit_box_body_entered"]
+[connection signal="timeout" from="Hit_Box/damaged/Timer" to="." method="_on_timer_timeout"]

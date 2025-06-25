@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
 
-const SPEED = 100.0
+const SPEED = 70.0
 const JUMP_VELOCITY = -240.0
 @onready var textures: AnimatedSprite2D = $textures
+@onready var timer: Timer = $Hit_Box/damaged/Timer
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -38,3 +39,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_hit_box_body_entered(_body):
+	velocity.y = -240
+	print("you died!")
+	Engine.time_scale = 0.5
+	timer.start()
+	
+func _on_timer_timeout():
+	Engine.time_scale = 1
+	get_tree().reload_current_scene()
