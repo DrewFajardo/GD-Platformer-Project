@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=4 uid="uid://dk5nlijn4fg7x"]
+[gd_scene load_steps=27 format=4 uid="uid://dk5nlijn4fg7x"]
 
 [ext_resource type="Texture2D" uid="uid://cj38kn888jdaw" path="res://assets/sprites/Tiles/Cursed-Tilesets [16x16]/simple.png" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dpblanwu8e7uy" path="res://scripts/score_manager.gd" id="1_85g3d"]
+[ext_resource type="PackedScene" uid="uid://c8717qcg8un7n" path="res://scenes/parallax.tscn" id="1_choun"]
 [ext_resource type="PackedScene" uid="uid://dpyjhyws1isrw" path="res://scenes/player.tscn" id="2_0wfyh"]
 [ext_resource type="FontFile" uid="uid://bl8qlsh57v5hg" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_85g3d"]
 [ext_resource type="PackedScene" uid="uid://12imovyfuclf" path="res://scenes/platform.tscn" id="3_sugp2"]
@@ -340,7 +341,9 @@ _data = {
 
 [node name="Main" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("2_0wfyh")]
+[node name="Parallax" parent="." instance=ExtResource("1_choun")]
+
+[node name="Player" parent="Parallax" instance=ExtResource("2_0wfyh")]
 position = Vector2(-90, -16)
 
 [node name="Tutorials" type="Node" parent="."]
@@ -382,6 +385,7 @@ tile_map_data = PackedByteArray("AADx/wAAAQACAAgAAAAKAAAAAQAEAAgAAAAOAAAAAQACAAg
 tile_set = SubResource("TileSet_tbgi4")
 
 [node name="background" type="TileMapLayer" parent="map"]
+visible = false
 show_behind_parent = true
 z_index = -2
 position = Vector2(-32, -64)

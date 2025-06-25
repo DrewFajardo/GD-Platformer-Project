@@ -138,7 +138,7 @@ debug_color = Color(0.93518, 0.209852, 0.374744, 0.42)
 wait_time = 0.4
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3.5, 3.5)
+zoom = Vector2(3, 3)
 limit_bottom = 120
 limit_smoothed = true
 position_smoothing_enabled = true

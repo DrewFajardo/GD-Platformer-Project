@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drq0jgdtxs5xh"
-path="res://.godot/imported/platform.png-945c851c9ab299fe95233d50c9fe3a55.ctex"
+uid="uid://c7kpkap22n1j"
+path="res://.godot/imported/parallax-demon-woods-far-trees.png-d5e02a238506d9819f584b256060a443.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Tiles/platform.png"
-dest_files=["res://.godot/imported/platform.png-945c851c9ab299fe95233d50c9fe3a55.ctex"]
+source_file="res://assets/sprites/Tiles/layers/parallax-demon-woods-far-trees.png"
+dest_files=["res://.godot/imported/parallax-demon-woods-far-trees.png-d5e02a238506d9819f584b256060a443.ctex"]
 
 [params]
 

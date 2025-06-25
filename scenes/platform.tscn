@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://12imovyfuclf"]
 
-[ext_resource type="Texture2D" uid="uid://drq0jgdtxs5xh" path="res://assets/sprites/Tiles/platform.png" id="1_ba0x2"]
+[ext_resource type="Texture2D" uid="uid://drq0jgdtxs5xh" path="res://assets/sprites/Tiles/Cursed-Tilesets [16x16]/platform.png" id="1_ba0x2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nlgqw"]
 size = Vector2(48, 6)
